@@ -1,5 +1,5 @@
 #! python3
-#This script scans a Centro-830 file and uses regex to scan the file and output only the line parts necessary for you to look through.
+#This script scans an EDI file and uses regex to scan the file and output only the line parts necessary for you to look through.
 
 import re
 import sys
