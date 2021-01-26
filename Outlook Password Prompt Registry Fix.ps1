@@ -1,0 +1,1 @@
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Office\16.0\Common\Identity" -Name DisableADALatopWAMOverride -Value 1 -PropertyType DWORD -Force
