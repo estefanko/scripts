@@ -10,6 +10,6 @@ Get-ADUser -Filter * -Properties DisplayName,SamAccountName,EmailAddress,LastLog
 
 Write-Output "Your file has been saved to \Documents\$FileName.csv"
 
-Write-Output "Closing this program."
+Write-Output "Closing Program"
 
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 3
