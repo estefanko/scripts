@@ -4,7 +4,7 @@ Import-Module ActiveDirectory
 
 $FileName = Read-Host "Enter in what you want the filename to be"
 
-Get-ADUser -Filter * -Properties DisplayName,SamAccountName,EmailAddress,LastLogonDate,Department,Title,Company | Export-Csv -Path [ENTER PATH WHERE YOU WANT THE FILE TO GO HERE]\$FileName.csv -NoTypeInformation
+Get-ADUser -Filter * -Properties DisplayName,SamAccountName,EmailAddress,LastLogonDate,Department,Title,Company | Export-Csv -Path C:\Users\[ENTER PATH USERNAME HERE]\Documents\$FileName.csv -NoTypeInformation
 
 Write-Output "Your file has been saved to \Documents\$FileName.csv"
 
