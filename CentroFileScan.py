@@ -15,7 +15,7 @@ def fileScan():
 
             with open(str(fileName)+".edi", "r") as openFile: #ONLY WORKS FOR EDI FILES. CHANGE FILE EXTENSION FOR OTHER TYPES.
                 
-                scannedFileData=centroFile.read() #Reads the file and stores the data as a variable
+                scannedFileData=openFile.read() #Reads the file and stores the data as a variable
                 return scannedFileData
                 openFile.close()
 
