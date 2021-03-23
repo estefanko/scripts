@@ -34,7 +34,7 @@ $UserCopy = Get-ADUser -Identity (Read-Host "Enter in the username of the user y
 $UserMemberOf = $UserCopy.MemberOf #Gets the security/distribution groups of a user you specify and assigns them to this variable
 $UserDepartment = $UserCopy.Department
 $UserCompany = $UserCopy.Company
-$UserCopyPath = $UserCopy.DistinguishedName -Split ",",3 #DistinguishedName is an inherit property that does not need to be called earlier. -Split takes the DistinguishedName and splits it into groups based on the comma delimeter.
+$UserCopyPath = $UserCopy.DistinguishedName -Split ",",3 #DistinguishedName is an inherent property that does not need to be called earlier. -Split takes the DistinguishedName and splits it into groups based on the comma delimeter.
 $UserPath = $UserCopyPath[2] #Selects the third group in the -Split property. Index starts at group [0] which is why group[2] is the third group.
 
 #Manager Variables
