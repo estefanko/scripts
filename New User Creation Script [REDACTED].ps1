@@ -25,7 +25,6 @@ while ($True){
 		}
 	else{
 		Write-Host "ERROR: Location not found. Please try again."
-		continue
 		}
 }
 
