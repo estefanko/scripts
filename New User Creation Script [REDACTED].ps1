@@ -5,7 +5,25 @@ Import-Module ADSync
 $UserFirstName = Read-Host "Enter the first name of the user"
 $UserLastName = Read-Host "Enter the last name of the user"
 $UserFullName = "$UserLastName, $UserFirstName" #Every other company probably has it as "$UserFirstName $UserLastName" but not at this one
-$UserName = ($UserFirstName.Substring(0,1) + $UserLastName).ToLower() #Gets the first letter of the first name and the last name and puts them together.
+
+while ($True){
+	$UserNameQuestion = Read-Host "Will the user have a non-standard username? (y/n)"
+	$UserNameQuestion = $UserNameQuestion.ToLower()
+	
+	if ($UserNameQuestion -eq "y"){
+		$UserName = Read-Host "Enter in the user's non-standard username"
+		break
+		}
+	elseif ($UserNameQuestion -eq "n"){
+		$UserName = ($UserFirstName.Substring(0,1) + $UserLastName).ToLower() #Gets the first letter of the first name and the last name and puts them together.
+		break
+		}
+	else{
+		Write-Host "ERROR: Unacceptable value. Please try again"
+		}
+}
+		
+
 $UserInitials = (($UserFirstName.Substring(0,1) + $UserLastName.Substring(0,1))).ToUpper()
 $UserTitle = Read-Host "Enter in the user's job title"
 $UserPhoneExtension = Read-Host "Enter in the user's phone extension" #This will be used for the -Office property since some phone numbers have separate internal numbers that are mapped to their direct dial numbers. The direct dial goes to the -Phone property and the internal extension is for -Office
