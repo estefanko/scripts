@@ -7,15 +7,15 @@ $UserLastName = Read-Host "Enter the last name of the user"
 $UserFullName = "$UserLastName, $UserFirstName" #Every other company probably has it as "$UserFirstName $UserLastName" but not at this one
 
 while ($True){
-	$UserNameQuestion = Read-Host "Will the user have a non-standard username? (y/n)"
+	$UserNameQuestion = Read-Host "Will the user have a regular username? (y/n)"
 	$UserNameQuestion = $UserNameQuestion.ToLower()
 	
 	if ($UserNameQuestion -eq "y"){
-		$UserName = Read-Host "Enter in the user's non-standard username"
+		$UserName = ($UserFirstName.Substring(0,1) + $UserLastName).ToLower() #Gets the first letter of the first name and the last name and puts them together.
 		break
 		}
 	elseif ($UserNameQuestion -eq "n"){
-		$UserName = ($UserFirstName.Substring(0,1) + $UserLastName).ToLower() #Gets the first letter of the first name and the last name and puts them together.
+		$UserName = Read-Host "Enter in the user's non-standard username"
 		break
 		}
 	else{
