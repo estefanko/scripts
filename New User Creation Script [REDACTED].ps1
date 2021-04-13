@@ -72,7 +72,7 @@ $UserEmailAddress = ($UserName + $EmailDomain) #Also used for the UserPrincipalN
 $UserPassword = Read-Host "Set the user's password (must match domain complexity requirements)" -AsSecureString
 
 #Create User
-New-ADUser -Name $UserFullName -GivenName $UserFirstName -Surname $UserLastName -Initials $UserInitials -SamAccountName $UserName -DisplayName $UserFullName -EmailAddress $UserEmailAddress -UserPrincipalName $UserEmailAddress -Title $UserTitle -Office $UserPhoneExtension -AccountPassword $UserPassword -Enabled $True -Manager $UserManager -Department $UserDepartment -Company $UserCompany -StreetAddress $UserStreetAddress -City "COMPANY CITY" -State "FL" -PostalCode "COMPANY ZIP CODE" -Country "US"  -HomePage "www.COMPANY (dot) com" -Path $UserPath
+New-ADUser -Name $UserFullName -GivenName $UserFirstName -Surname $UserLastName -Initials $UserInitials -SamAccountName $UserName -DisplayName $UserFullName -EmailAddress $UserEmailAddress -UserPrincipalName $UserEmailAddress -Title $UserTitle -Office $UserPhoneExtension -AccountPassword $UserPassword -Enabled $True -Manager $UserManager -Department $UserDepartment -Company $UserCompany -StreetAddress $UserStreetAddress -City "COMPANY CITY" -State "FL" -PostalCode "COMPANY ZIP CODE" -Country "US"  -HomePage "www.COMPANY (dot) com" -Path $UserPath -OtherAttributes @{proxyAddresses = ("SMTP:"+ $UserEmailAddress)}
 
 #Add user to group (add user permissions)
 $UserMemberOf | Add-ADGroupMember -Members $UserName #Takes the security/distribution groups you've copied and applies them to the user you just created
