@@ -2,29 +2,29 @@ Import-Module ActiveDirectory
 Import-Module ADSync
 
 #User variables
-$UserFirstName = Read-Host "Enter the first name of the user"
-$UserLastName = Read-Host "Enter the last name of the user"
-$UserFullName = "$UserLastName, $UserFirstName" #Every other company probably has it as "$UserFirstName $UserLastName" but not at this one
+$UserFirstName = Read-Host "Enter the legal first name of the user"
+$UserPreferredName = Read-Host "Enter in the user's preferred first name"
+$UserLastName = Read-Host "Enter the legal last name of the user"
+$UserFullName = "$UserLastName, $UserPreferredName" #Every other company probably has it as "$UserPreferredName $UserLastName"
+$UserInitials = (($UserPreferredName.Substring(0,1) + $UserLastName.Substring(0,1))).ToUpper()
 
 while ($True){
 	$UserNameQuestion = Read-Host "Will the user have a regular username? (y/n)"
 	$UserNameQuestion = $UserNameQuestion.ToLower()
 	
 	if ($UserNameQuestion -eq "y"){
-		$UserName = ($UserFirstName.Substring(0,1) + $UserLastName).ToLower() #Gets the first letter of the first name and the last name and puts them together.
+		$UserName = ($UserPreferredName.Substring(0,1) + $UserLastName).ToLower() #Gets the first letter of the first name and the last name and puts them together.
 		break
-		}
+	}
 	elseif ($UserNameQuestion -eq "n"){
 		$UserName = Read-Host "Enter in the user's non-standard username"
 		break
-		}
+	}
 	else{
 		Write-Host "ERROR: Unacceptable value. Please try again"
-		}
+	}
 }
-		
 
-$UserInitials = (($UserFirstName.Substring(0,1) + $UserLastName.Substring(0,1))).ToUpper()
 $UserTitle = Read-Host "Enter in the user's job title"
 $UserPhoneExtension = Read-Host "Enter in the user's phone extension" #This will be used for the -Office property since some phone numbers have separate internal numbers that are mapped to their direct dial numbers. The direct dial goes to the -Phone property and the internal extension is for -Office
 
