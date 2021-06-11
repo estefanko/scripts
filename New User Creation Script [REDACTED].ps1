@@ -36,14 +36,14 @@ while ($True){
 	if ($UserLocation -eq "1"){
 		$UserStreetAddress= "LOCATION 1 STREET ADDRESS"
 		break
-		}
+	}
 	elseif ($UserLocation -eq "2"){
 		$UserStreetAddress= "LOCATION 2 STREET ADDRESS"
 		break
-		}
+	}
 	else{
 		Write-Host "ERROR: Location not found. Please try again."
-		}
+	}
 }
 
 #Copied variables
