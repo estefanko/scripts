@@ -1,11 +1,12 @@
 Import-Module ActiveDirectory
 
 #Import the most recent CSV file
-$CSVFile = Get-ChildItem -Path "[REDACTED PATH]\*.csv" -File | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1
-$CSVData = Import-Csv -Path $CSVFile
+$CSVFile = Import-Csv (Get-ChildItem -Path "[REDACTED PATH]\*.csv" -File | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1)
 
 #Remove the previous log file
-Remove-Item -Path "[REDACTED PATH].txt"
+if ((Test-Path -Path "[REDACTED PATH].txt") -eq $True){
+    Remove-Item -Path "[REDACTED PATH].txt"
+}
 
 #Start of Output
 Write-Host "Updating user information." -ForegroundColor Yellow
