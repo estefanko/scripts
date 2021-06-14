@@ -13,7 +13,7 @@ Write-Host "Updating user information." -ForegroundColor Yellow
 Write-Host "`r`nErrors are shown below:`r`n" -ForegroundColor Red -BackgroundColor Black
 
 #Select the specified data for each user in the CSV file and iterate over each user object and update Active Directory properties
-ForEach ($User in $CSVData){
+ForEach ($User in $CSVFile){
     try{
         #Manager Data
         $Manager = $User.Manager -Split ",",2
