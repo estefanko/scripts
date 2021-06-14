@@ -19,7 +19,7 @@ ForEach ($User in $CSVFile){
         $Manager = $User.Manager -Split ",",2
         $ManagerFirstName = $Manager[1]
         $ManagerLastName = $Manager[0]
-        $ManagerObjeect = Get-ADUser -Filter {(GivenName -like $ManagerFirstName) -and (Surname -like $ManagerLastName)}
+        $ManagerObject = Get-ADUser -Filter {(GivenName -like $ManagerFirstName) -and (Surname -like $ManagerLastName)}
 
         #User data
         $FirstName = $User."First Name"
@@ -29,7 +29,7 @@ ForEach ($User in $CSVFile){
         $Title = $User."Job Title"
         
         #Change user properties based on the the CSV data
-        Set-ADUser -Identity $UserObject -Manager $ManagerObjeect -Department $Department -Title $Title
+        Set-ADUser -Identity $UserObject -Manager $ManagerObject -Department $Department -Title $Title
     }
 
     #If this error appears for a user with an AD account, check the for their first name in the CSV data vs their first name in AD. Often it will be a difference between their legal first name in the CSV and their nickname in AD (e.g. Michael vs Mike).
