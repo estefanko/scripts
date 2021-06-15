@@ -13,7 +13,7 @@ $SecurePassword = ConvertTo-SecureString -String $GeneratedPassword -AsPlainText
 
 #Get the user information
 $UserAccount = Read-Host -Prompt "Enter the username of the account you'd like to disable"
-$UserGUID= Get-ADUser -Identity $UserAccount -Properties ObjectGUID
+$UserGUID = Get-ADUser -Identity $UserAccount -Properties ObjectGUID
 
 #Reset password for the user
 Set-ADAccountPassword -Identity $UserGUID -NewPassword $SecurePassword -Confirm:$False #-Confirm:$False disables the interactive prompt
