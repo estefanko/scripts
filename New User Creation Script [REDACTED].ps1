@@ -34,11 +34,11 @@ while ($True){
 	$UserLocation= $UserLocation.ToLower()
 	
 	if ($UserLocation -eq "1"){
-		$UserStreetAddress= "LOCATION 1 STREET ADDRESS"
+		$UserStreetAddress = "LOCATION 1 STREET ADDRESS"
 		break
 	}
 	elseif ($UserLocation -eq "2"){
-		$UserStreetAddress= "LOCATION 2 STREET ADDRESS"
+		$UserStreetAddress = "LOCATION 2 STREET ADDRESS"
 		break
 	}
 	else{
@@ -62,8 +62,9 @@ $UserManager = Get-ADUser -Identity $Manager
 
 Switch($UserCompany)
 {
-	"COMPANY 1"{$EmailDomain= "@COMPANY1.com"} #The $EmailDomain variable doesn't need to be declared before. It's literally made up right here.
-	"COMPANY 2"{$EmailDomain= "@COMPANY2.com"}
+	"COMPANY 1"{$EmailDomain = "@COMPANY1.com"} #The $EmailDomain variable doesn't need to be declared before. It's literally made up right here.
+	"COMPANY 2"{$EmailDomain = "@COMPANY2.com"}
+	Default{$EmailDomain = "@COMPANY1.com"}
 }
 
 $UserEmailAddress = ($UserName + $EmailDomain) #Also used for the UserPrincipalName (UPN)
