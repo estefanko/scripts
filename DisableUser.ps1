@@ -1,11 +1,11 @@
 Import-Module ActiveDirectory
 
 #Generate a random-ish password
-$MinimumPasswordLength = 30
-$MaximumPasswordLength = 50
+$MinimumPasswordLength = 110
+$MaximumPasswordLength = 128
 $PasswordLength = Get-Random -Minimum $MinimumPasswordLength -Maximum $MaximumPasswordLength
-$MinimumNonAlphaNumericCharacters = 8
-$MaximumNonAlphaNumericCharacters = 16
+$MinimumNonAlphaNumericCharacters = 30
+$MaximumNonAlphaNumericCharacters = 50
 $RandomNonAlphaNumericCharacters = Get-Random -Minimum $MinimumNonAlphaNumericCharacters -Maximum $MaximumNonAlphaNumericCharacters
 Add-Type -AssemblyName System.Web
 $GeneratedPassword = [System.Web.Security.Membership]::GeneratePassword($PasswordLength, $RandomNonAlphaNumericCharacters)
@@ -13,14 +13,14 @@ $SecurePassword = ConvertTo-SecureString -String $GeneratedPassword -AsPlainText
 
 #Get the user information
 $UserAccount = Read-Host -Prompt "Enter the username of the account you'd like to disable"
-$UserGUID = Get-ADUser -Identity $UserAccount -Properties ObjectGUID
+$UserGUID= Get-ADUser -Identity $UserAccount -Properties ObjectGUID
 
 #Reset password for the user
 Set-ADAccountPassword -Identity $UserGUID -NewPassword $SecurePassword -Confirm:$False #-Confirm:$False disables the interactive prompt
 Write-Host "Reset the password for $UserAccount"
 
 #Disable User and move them to the disabled users OU
-$DisabledOUGUID = Get-ADOrganizationalUnit -Identity "OU=Users,OU=Disabled,DC=[REDACTED],DC=[REDACTED]" -Properties ObjectGUID #MAKE SURE TO CHANGE THE DOMAIN CONTROLLERS
+$DisabledOUGUID = Get-ADOrganizationalUnit -Identity "OU=Users,OU=Disabled,DC=shawdev,DC=local" -Properties ObjectGUID
 Disable-ADAccount -Identity $UserGUID
 Move-ADObject -Identity $UserGUID -TargetPath $DisabledOUGUID
 
@@ -35,7 +35,7 @@ Write-Host "Set $UserAccount description to the current time"
 
 #Get the security and distribution groups and add them to the Telephone Notes section of the user properties
 [string]$UserGroups = Get-ADPrincipalGroupMembership -Identity $UserAccount | Select-Object -ExpandProperty Name
-Get-ADUser -Identity $UserAccount -Properties info | Set-ADUser -Replace @{info = "Removed from security/distribution groups: `n`r`n`r$UserGroups"} #I don't know how to format this properly
+Get-ADUser -Identity $UserAccount -Properties info | Set-ADUser -Replace @{info = "Removed from security/distribution groups: `n`r`n`r$UserGroups"}
 Write-Host "Added security/distribution groups to the Notes section of the Telephone tab in the AD user properties"
 
 #Remove user from security and distribution groups
@@ -43,5 +43,6 @@ $UserMemberOF = Get-ADUser -Identity $UserAccount -Properties MemberOf
 $MemberOfGroups = $UserMemberOF.MemberOf
 $MemberOfGroups | Remove-ADGroupMember -Members $UserAccount -Confirm:$False
 Write-Host "Remove security/distriution group access from $UserAccount"
+
 
 Start-Sleep -Seconds 5
