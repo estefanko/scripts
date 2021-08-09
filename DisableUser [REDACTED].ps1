@@ -47,15 +47,24 @@ While ($True){
     Write-Host "Remove security/distriution group access from $UserAccount"
 
     #Loop
-    $LoopInput = "Do you want to disable another account? (y/n)"
-    $LoopAnswer = $LoopInput.ToLower()
+    :SubLoop while ($True) {
+        
+        $LoopInput = Read-Host "`r`n`r`nDo you want to disable another account? (y/n)"
+        $LoopAnswer = $LoopInput.ToLower()
 
-    if ($LoopAnswer -eq ("y" -or "yes")){
-        break
+        if ($LoopAnswer -eq "y") {
+            break MainLoop
+        }
+        elseif ($LoopAnswer -eq "n") {
+            break SubLoop
+        }
+        else {
+            Write-Host "ERROR: Unacceptable value. Please try again."
+        }   
     }
 
 }
 
-Write-Host "Closing Program"
+Write-Host "`n`nClosing Program"
 
 Start-Sleep -Seconds 5
