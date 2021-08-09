@@ -1,6 +1,6 @@
 Import-Module ActiveDirectory
 
-While ($True){
+:MainLoop While ($True){
 
     #Generate a random-ish password
     $MinimumPasswordLength = 110
@@ -53,10 +53,10 @@ While ($True){
         $LoopAnswer = $LoopInput.ToLower()
 
         if ($LoopAnswer -eq "y") {
-            break MainLoop
+            break SubLoop
         }
         elseif ($LoopAnswer -eq "n") {
-            break SubLoop
+            break MainLoop
         }
         else {
             Write-Host "ERROR: Unacceptable value. Please try again."
