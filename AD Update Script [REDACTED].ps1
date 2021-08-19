@@ -1,7 +1,7 @@
 Import-Module ActiveDirectory
 
 #Import the most recent CSV file
-$CSVFile = Import-Csv (Get-ChildItem -Path "[REDACTED]\*.csv" -File | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1)
+$CSVFile = (Import-Csv (Get-ChildItem -Path "[REDACTED]\*.csv" -File | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1)) | Sort-Object -Property "Last Name"
 
 #Remove the previous log file
 if ((Test-Path -Path "[REDACTED].txt") -eq $True){
